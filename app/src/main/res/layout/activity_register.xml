@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.omar.chat_application.register.RegisterViewModel"
+            />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        tools:context=".register.RegisterActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="0dp"
+            android:background="@color/transparent"
+            android:theme="@style/Theme.Chatapplication.AppBarOverlay">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:elevation="0dp"
+                app:popupTheme="@style/Theme.Chatapplication.PopupOverlay">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/create_account"
+                        android:textSize="18sp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guid_line"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent=".29">
+
+            </androidx.constraintlayout.widget.Guideline>
+
+            <LinearLayout
+                android:id="@+id/linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/guid_line"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/first_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxBackgroundColor="@color/white">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="First Name"
+                        android:text="@={vm.firstName}"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/last_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxBackgroundColor="@color/white">
+
+                    <!-- " = " for two way data binding -->
+<!-- two way data binding ( any change in a view ) viewmodel observes it -->
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Last Name"
+                        android:text="@={vm.lastName}"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxBackgroundColor="@color/white">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="User Name"
+                        android:text="@={vm.username}"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/email_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxBackgroundColor="@color/white">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={vm.email}"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxBackgroundColor="@color/white">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Password"
+                        android:text="@={vm.password}"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/create_account"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="354dp"
+                android:layout_height="wrap_content"
+                android:text="Create Account"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintTop_toBottomOf="@id/linear_layout"
+                android:drawableRight="@drawable/arrow"
+                android:onClick="@{()->vm.createAccount()}"
+                >
+            </Button>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
