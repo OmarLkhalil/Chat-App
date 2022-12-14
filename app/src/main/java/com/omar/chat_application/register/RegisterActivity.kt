@@ -10,6 +10,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = RegisterViewModel()
+
     }
 
     override fun getLayoutId(): Int {

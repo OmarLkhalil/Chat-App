@@ -8,7 +8,6 @@
             name="vm"
             type="com.omar.chat_application.register.RegisterViewModel"
             />
-
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -79,8 +78,9 @@
                     android:id="@+id/first_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:boxBackgroundColor="@color/white">
-
+                    app:boxBackgroundColor="@color/white"
+                    app:error="@{vm.firstNameError}"
+                    >
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -94,6 +94,7 @@
                     android:id="@+id/last_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:error="@{vm.lastNameError}"
                     app:boxBackgroundColor="@color/white">
 
                     <!-- " = " for two way data binding -->
@@ -111,6 +112,7 @@
                     android:id="@+id/user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:error="@{vm.userNameError}"
                     app:boxBackgroundColor="@color/white">
 
                     <EditText
@@ -126,12 +128,14 @@
                     android:id="@+id/email_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:error="@{vm.emailError}"
                     app:boxBackgroundColor="@color/white">
 
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@={vm.email}"
+                        android:hint="Email Address"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -140,6 +144,7 @@
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:error="@{vm.passwordError}"
                     app:boxBackgroundColor="@color/white">
 
                     <EditText
@@ -147,6 +152,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Password"
                         android:text="@={vm.password}"
+                        android:inputType="textPassword"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
