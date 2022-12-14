@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
-abstract class BaseActivity<DB:ViewDataBinding, VM:BaseViewModel>: AppCompatActivity() {
+abstract class BaseActivity<DB:ViewDataBinding, VM:BaseViewModel<*>>: AppCompatActivity() {
     lateinit var viewModel: VM
     lateinit var binding  : DB
 

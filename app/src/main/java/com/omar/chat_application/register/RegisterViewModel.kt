@@ -6,7 +6,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.omar.chat_application.base.BaseViewModel
 
-class RegisterViewModel: BaseViewModel() {
+class RegisterViewModel: BaseViewModel<Navigator>() {
 
     // we will bind it with xml using two way dataBinding
     val firstName  = ObservableField<String>()
@@ -29,12 +29,12 @@ class RegisterViewModel: BaseViewModel() {
 
     fun createAccount(){
         if(validate()){
-            addAccountToFirebase()
+            register()
         }
     }
 
 
-    private fun addAccountToFirebase() {
+    private fun register() {
         showLoading.value = true
         auth.createUserWithEmailAndPassword(email.get()!!, password.get()!!)
             .addOnCompleteListener{
