@@ -16,75 +16,58 @@ abstract class BaseActivity<DB:ViewDataBinding, VM:BaseViewModel>: AppCompatActi
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, getLayoutId())
         viewModel = initViewModel()
-
-        subscribeToLiveDate()
+        subscribetoLiveData()
     }
 
-    fun subscribeToLiveDate(){
-
-        viewModel.messageLiveDate.observe(this) {
-            message ->
-            showDialog(message, "ok")
-
+    private fun subscribetoLiveData() {
+        viewModel.messageLiveDate.observe(this) { message ->
+            showDialog(message,"ok")
         }
-        viewModel.showLoading.observe(this) {
-            show ->
-            if(show){
+        viewModel.showLoading.observe(this) { show ->
+            if (show)
                 showLoading()
-            }
-            else {
+            else
                 hideLoading()
-            }
         }
     }
-
-    var alertDialog: AlertDialog?=null
-    fun showDialog(message:String,
-                   posActionName:String? = null,
-                   posAction: DialogInterface.OnClickListener? = null,
-                   negActionName:String? = null,
-                   negAction: DialogInterface.OnClickListener? = null,
-                   cancelable:Boolean = true
-                   ){
-       val builder =  AlertDialog.Builder(this)
-            .setMessage(message)
-        val defaultAction = DialogInterface.OnClickListener { dialog, which -> dialog?.dismiss() }
-        if(posActionName!= null)
-        {
-            builder.setPositiveButton(posActionName,
-                posAction ?: defaultAction
-            )
+    private var alertDialog:AlertDialog?=null
+    private fun showDialog(message:String,
+                           posActionName:String?=null,
+                           posAction:DialogInterface.OnClickListener?=null,
+                           negActionName:String?=null,
+                           negAction:DialogInterface.OnClickListener?=null,
+                           cancelable:Boolean=true
+    ){
+        val defAction = DialogInterface.OnClickListener { dialog, p1 -> dialog?.dismiss() }
+        val builder = AlertDialog.Builder(this).setMessage(message)
+        if (posActionName!=null){
+            builder.setPositiveButton(posActionName,posAction ?: defAction)
         }
-        if(negActionName!= null)
-        {
-            builder.setNegativeButton(negActionName, negAction?: defaultAction)
+        if (negActionName!=null){
+            builder.setPositiveButton(negActionName,negAction ?: defAction)
         }
         builder.setCancelable(cancelable)
 
         alertDialog = builder.show()
     }
-
-    fun hideAlertDialog(){
+    fun hideAlertDialog() {
         alertDialog?.dismiss()
         alertDialog = null
     }
 
-    var progressDialog : ProgressDialog?= null
-    fun showLoading(){
-        ProgressDialog(this)
-            .setMessage("Loading...")
-        ProgressDialog(this)
-            .setCancelable(false)
+    private var progressDialog:ProgressDialog?=null
+    private fun showLoading() {
+        progressDialog = ProgressDialog(this)
+        progressDialog?.setMessage("Loading..")
+        progressDialog?.setCancelable(false)
         progressDialog?.show()
     }
-
-    fun hideLoading(){
+    private fun hideLoading() {
         progressDialog?.dismiss()
         progressDialog = null
     }
 
     abstract fun getLayoutId(): Int
-    abstract fun initViewModel():VM
-
+    abstract fun initViewModel(): VM
 
 }

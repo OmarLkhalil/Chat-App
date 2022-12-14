@@ -24,7 +24,7 @@ class RegisterViewModel: BaseViewModel() {
 
 
     // Initialize the firebase Authentication
-    val auth = Firebase.auth
+    private val auth = Firebase.auth
 
 
     fun createAccount(){
@@ -32,6 +32,7 @@ class RegisterViewModel: BaseViewModel() {
             addAccountToFirebase()
         }
     }
+
 
     private fun addAccountToFirebase() {
         showLoading.value = true
@@ -47,7 +48,7 @@ class RegisterViewModel: BaseViewModel() {
                 }
                 else {
                     // Show success message
-                    messageLiveDate.value = task.exception?.localizedMessage
+                    messageLiveDate.value = "Successful Registration"
                     Log.e("", "Error cause" + task.exception?.localizedMessage)
                     Log.i("", "Successfully added account")
                 }
