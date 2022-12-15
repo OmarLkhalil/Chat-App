@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.omar.chat_application.login.LoginViewModel"
+            type="com.omar.chat_application.ui.login.LoginViewModel"
             />
     </data>
 
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background"
-        tools:context=".register.RegisterActivity">
+        tools:context=".ui.register.RegisterActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -88,6 +88,7 @@
                         android:layout_height="wrap_content"
                         android:text="@={vm.email}"
                         android:hint="Email Address"
+                        android:maxLines="1"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -104,6 +105,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Password"
                         android:text="@={vm.password}"
+                        android:maxLines="1"
                         android:inputType="textPassword"
                         />
 

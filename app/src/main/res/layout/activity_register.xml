@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.omar.chat_application.register.RegisterViewModel"
+            type="com.omar.chat_application.ui.register.RegisterViewModel"
             />
     </data>
 
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background"
-        tools:context=".register.RegisterActivity">
+        tools:context=".ui.register.RegisterActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"

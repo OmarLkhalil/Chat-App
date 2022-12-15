@@ -1,11 +1,14 @@
-package com.omar.chat_application.login
+package com.omar.chat_application.ui.login
 
 
 import android.util.Log
 import androidx.databinding.ObservableField
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.omar.chat_application.base.BaseViewModel
+import com.omar.chat_application.database.model.AppUser
+import com.omar.chat_application.database.signIn
 
 class LoginViewModel: BaseViewModel<Navigator>() {
 
@@ -41,13 +44,31 @@ class LoginViewModel: BaseViewModel<Navigator>() {
                 else {
                     // Show success message
                     // navigation to home screen
-                    messageLiveDate.value = "Successful Login"
+                    checkUserInFireStore(task.result.user!!.uid)
                     navigator?.openHomeScreen()
                     Log.e("", "Error cause" + task.exception?.localizedMessage)
                     Log.i("", "Successfully signed in")
                 }
             }
 
+    }
+
+    private fun checkUserInFireStore(uid: String?) {
+        showLoading.value = true
+        signIn(uid!!,
+           OnSuccessListener{   docSnapshot ->
+                showLoading.value = false
+                val user = docSnapshot.toObject(AppUser::class.java)
+                if(user == null){
+                    messageLiveDate.value = "Invalid Email or Password"
+                    return@OnSuccessListener
+                }
+               navigator?.openHomeScreen()
+            }
+        ) {
+            showLoading.value = false
+            messageLiveDate.value = it.localizedMessage
+        }
     }
 
     private fun validate(): Boolean{

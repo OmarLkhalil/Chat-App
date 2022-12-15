@@ -1,10 +1,12 @@
-package com.omar.chat_application.register
+package com.omar.chat_application.ui.register
 
 import android.util.Log
 import androidx.databinding.ObservableField
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.omar.chat_application.base.BaseViewModel
+import com.omar.chat_application.database.model.AppUser
+import com.omar.chat_application.database.addUserToFireStore
 
 class RegisterViewModel: BaseViewModel<Navigator>() {
 
@@ -48,11 +50,33 @@ class RegisterViewModel: BaseViewModel<Navigator>() {
                 }
                 else {
                     // Show success message
-                    messageLiveDate.value = "Successful Registration"
+                    createFirestoreUser(task.result.user!!.uid)
                     Log.e("", "Error cause" + task.exception?.localizedMessage)
                     Log.i("", "Successfully added account")
                 }
             }
+    }
+
+    private fun createFirestoreUser(uid: String?) {
+        showLoading.value = true
+        val user = AppUser(
+            id = uid,
+            firstName = firstName.get(),
+            lastName  = lastName.get(),
+            userName  = username.get(),
+            email     = email.get()
+        )
+        addUserToFireStore(user,
+            {
+                showLoading.value = false
+                navigator?.openHomeScreen()
+            },
+            {
+                showLoading.value     = false
+                messageLiveDate.value = it.localizedMessage
+            }
+            )
+
     }
 
     private fun validate(): Boolean{

@@ -1,16 +1,16 @@
-package com.omar.chat_application.login
+package com.omar.chat_application.ui.login
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import com.omar.chat_application.MyApplication
+import com.omar.chat_application.ui.HomeActivity
 import com.omar.chat_application.R
 import com.omar.chat_application.base.BaseActivity
 import com.omar.chat_application.databinding.ActivityLoginBinding
-import com.omar.chat_application.register.RegisterActivity
+import com.omar.chat_application.ui.register.RegisterActivity
 
 
-class LoginActivity: BaseActivity<ActivityLoginBinding, LoginViewModel>(), Navigator{
+class LoginActivity: BaseActivity<ActivityLoginBinding, LoginViewModel>(), Navigator {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,7 @@ class LoginActivity: BaseActivity<ActivityLoginBinding, LoginViewModel>(), Navig
     }
 
     override fun openHomeScreen() {
-        val intent = Intent(this, MyApplication::class.java)
+        val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
     }
 

@@ -1,4 +1,4 @@
-package com.omar.chat_application
+package com.omar.chat_application.ui
 
 import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout

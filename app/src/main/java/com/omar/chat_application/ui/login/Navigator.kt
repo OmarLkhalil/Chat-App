@@ -1,4 +1,4 @@
-package com.omar.chat_application.login
+package com.omar.chat_application.ui.login
 
 interface Navigator {
     fun openHomeScreen()
